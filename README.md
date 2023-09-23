@@ -1,6 +1,11 @@
 # [imgui-js](https://github.com/flyover/imgui-js)
 JavaScript bindings for [Dear ImGui](https://github.com/ocornut/imgui) using [Emscripten](https://github.com/kripken/emscripten) and [TypeScript](https://github.com/Microsoft/TypeScript)
 
+## 中文支持
+
+启动了ALLOW_MEMORY_GROWTH选项，避免因为中文字体过大造成OOM。
+由于我的构建环境与原作者有所差距，所以只实现了build目录下支持ALLOW_MEMORY_GROWTH选项，未能发布到dist目录下。但是已经足够使用了。
+
 ## Example
 [ImGui JavaScript+WebGL example](https://flyover.github.io/imgui-js/example/)
 

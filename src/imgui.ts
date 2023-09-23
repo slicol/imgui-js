@@ -98,8 +98,8 @@ export function IMGUI_CHECKVERSION(): boolean { return DebugCheckVersionAndDataL
 
 export const IMGUI_HAS_TABLE: boolean = true;
 
-export function ASSERT(c: any): asserts c { if (!c) { throw new Error(); } }
-export function IM_ASSERT(c: any): asserts c { if (!c) { throw new Error(); } }
+export function ASSERT(c: any) { if (!c) { throw new Error(); } }
+export function IM_ASSERT(c: any) { if (!c) { throw new Error(); } }
 
 export { IM_ARRAYSIZE as ARRAYSIZE }
 export function IM_ARRAYSIZE(_ARR: ArrayLike<any> | ImStringBuffer): number {

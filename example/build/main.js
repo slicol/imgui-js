@@ -57,7 +57,8 @@ System.register(["imgui-js", "./imgui_impl.js", "./imgui_demo.js", "./imgui_memo
             //io.ConfigFlags |= ImGui.ConfigFlags.NavEnableKeyboard;     // Enable Keyboard Controls
             //io.ConfigFlags |= ImGui.ConfigFlags.NavEnableGamepad;      // Enable Gamepad Controls
             // Setup Dear ImGui style
-            ImGui.StyleColorsDark();
+            // ImGui.StyleColorsDark();
+            ImGui.StyleColorsLight();
             //ImGui.StyleColorsClassic();
             // Load Fonts
             // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
@@ -68,12 +69,14 @@ System.register(["imgui-js", "./imgui_impl.js", "./imgui_demo.js", "./imgui_memo
             // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
             io.Fonts.AddFontDefault();
             font = yield AddFontFromFileTTF("../imgui/misc/fonts/Roboto-Medium.ttf", 16.0);
+            font = yield AddFontFromFileTTF("../fonts/DroidSansFallback.ttf", 18.0, null, io.Fonts.GetGlyphRangesChineseFull());
             // font = await AddFontFromFileTTF("../imgui/misc/fonts/Cousine-Regular.ttf", 15.0);
             // font = await AddFontFromFileTTF("../imgui/misc/fonts/DroidSans.ttf", 16.0);
             // font = await AddFontFromFileTTF("../imgui/misc/fonts/ProggyTiny.ttf", 10.0);
             // font = await AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0, null, io.Fonts.GetGlyphRangesJapanese());
             // font = await AddFontFromFileTTF("https://raw.githubusercontent.com/googlei18n/noto-cjk/master/NotoSansJP-Regular.otf", 18.0, null, io.Fonts.GetGlyphRangesJapanese());
             ImGui.ASSERT(font !== null);
+            io.FontDefault = font;
             // Setup Platform/Renderer backends
             // ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
             // ImGui_ImplOpenGL3_Init(glsl_version);
@@ -122,6 +125,7 @@ System.register(["imgui-js", "./imgui_impl.js", "./imgui_demo.js", "./imgui_memo
             // static int counter = 0;
             ImGui.Begin("Hello, world!"); // Create a window called "Hello, world!" and append into it.
             ImGui.Text("This is some useful text."); // Display some text (you can use a format strings too)
+            ImGui.Text("Chinese Font: 这是一些有用的中文文本。"); // Display some text (you can use a format strings too)
             ImGui.Checkbox("Demo Window", (value = show_demo_window) => show_demo_window = value); // Edit bools storing our windows open/close state
             ImGui.Checkbox("Another Window", (value = show_another_window) => show_another_window = value);
             ImGui.SliderFloat("float", (value = f) => f = value, 0.0, 1.0); // Edit 1 float using a slider from 0.0f to 1.0f

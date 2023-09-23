@@ -1,4 +1,4 @@
-/// <reference types="emscripten" />
+
 
 export declare class EmscriptenClassHandle {
 }

@@ -52,7 +52,7 @@ BIND_FLAGS += -s NO_FILESYSTEM=1
 BIND_FLAGS += -s MODULARIZE=1
 # BIND_FLAGS += -s EXPORT_NAME=\"ImGui\"
 BIND_FLAGS += -s EXPORT_BINDINGS=1
-# BIND_FLAGS += -s EXPORT_ALL=1
+BIND_FLAGS += -s EXPORT_ALL=1
 # BIND_FLAGS += -s MEM_INIT_METHOD=0
 # BIND_FLAGS += --memory-init-file 0
 BIND_FLAGS += -s SINGLE_FILE=1
@@ -61,7 +61,7 @@ BIND_FLAGS += -s SINGLE_FILE=1
 # BIND_FLAGS += -s BINARYEN_METHOD=\"interpret-asm2wasm,asmjs\"
 # BIND_FLAGS += -s BINARYEN_TRAP_MODE=\"clamp\"
 # BIND_FLAGS += -s TOTAL_MEMORY=4194304
-# BIND_FLAGS += -s ALLOW_MEMORY_GROWTH=1
+BIND_FLAGS += -s ALLOW_MEMORY_GROWTH=1
 BIND_FLAGS += -s EMBIND_STD_STRING_IS_UTF8=1
 
 build-bind-imgui: build/emscripten.d.ts build/bind-imgui.d.ts build/bind-imgui.js

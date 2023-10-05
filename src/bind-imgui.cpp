@@ -1,4 +1,6 @@
 #include "imgui.h"
+#include "imgui_theme.h"
+using namespace ImGuiTheme;
 
 #ifndef __FLT_MAX__
 #define __FLT_MAX__ 3.40282346638528859812e+38F
@@ -3021,3 +3023,156 @@ EMSCRIPTEN_BINDINGS(ImGui) {
     emscripten::function("MemAlloc", FUNCTION(emscripten::val, (size_t sz), { void* p = ImGui::MemAlloc(sz); return emscripten::val(p); }), emscripten::allow_raw_pointers());
     emscripten::function("MemFree", FUNCTION(void, (emscripten::val ptr), { void* _ptr = ptr.as<void*>(emscripten::allow_raw_pointers()); ImGui::MemFree(_ptr); }));
 }
+
+
+//=========================================================================
+// Add by slicol
+// Add some new bindings
+
+// struct ImGuiThemeTweaks
+// {
+        // Common rounding for widgets. If < 0, this is ignored.
+        //float Rounding = -1.f;
+        // If rounding is applied, scrollbar rounding needs to be adjusted to be visually pleasing in conjunction with other widgets roundings. Only applied if Rounding > 0.f)
+        //float RoundingScrollbarRatio = 4.f;
+        // Change the alpha that will be applied to windows, popups, etc. If < 0, this is ignored.
+        //float AlphaMultiplier = -1.f;
+
+        //
+        // HSV Color tweaks
+        //
+        // Change the hue of all widgets (gray widgets will remain gray, since their saturation is zero). If < 0, this is ignored.
+        //float Hue = -1.f;
+        // Multiply the saturation of all widgets (gray widgets will remain gray, since their saturation is zero). If < 0, this is ignored.
+        //float SaturationMultiplier = -1.f;
+        // Multiply the value (luminance) of all front widgets. If < 0, this is ignored.
+        //float ValueMultiplierFront = -1.f;
+        // Multiply the value (luminance) of all backgrounds. If < 0, this is ignored.
+        //float ValueMultiplierBg = -1.f;
+        // Multiply the value (luminance) of text. If < 0, this is ignored.
+        //float ValueMultiplierText = -1.f;
+        // Multiply the value (luminance) of FrameBg. If < 0, this is ignored.
+        // (Background of checkbox, radio button, plot, slider, text input)
+        //float ValueMultiplierFrameBg = -1.f;
+// };
+EMSCRIPTEN_BINDINGS(ImGuiThemeTweaks) {
+    emscripten::class_<ImGuiThemeTweaks>("ImGuiThemeTweaks")
+        CLASS_MEMBER(ImGuiThemeTweaks, Rounding)
+        CLASS_MEMBER(ImGuiThemeTweaks, RoundingScrollbarRatio)
+        CLASS_MEMBER(ImGuiThemeTweaks, AlphaMultiplier)
+        CLASS_MEMBER(ImGuiThemeTweaks, Hue)
+        CLASS_MEMBER(ImGuiThemeTweaks, SaturationMultiplier)
+        CLASS_MEMBER(ImGuiThemeTweaks, ValueMultiplierFront)
+        CLASS_MEMBER(ImGuiThemeTweaks, ValueMultiplierBg)
+        CLASS_MEMBER(ImGuiThemeTweaks, ValueMultiplierText)
+        CLASS_MEMBER(ImGuiThemeTweaks, ValueMultiplierFrameBg)
+    ;
+}
+
+
+
+//struct ImGuiTweakedTheme
+//{
+    //ImGuiTheme_ Theme = ImGuiTheme_DarculaDarker;
+    //ImGuiThemeTweaks Tweaks = ImGuiThemeTweaks();
+//};
+EMSCRIPTEN_BINDINGS(ImGuiTweakedTheme) {
+    emscripten::class_<ImGuiTweakedTheme>("ImGuiTweakedTheme")
+        CLASS_MEMBER(ImGuiTweakedTheme, Theme)
+        CLASS_MEMBER_GET_RAW_REFERENCE(ImGuiTweakedTheme, Tweaks)
+    ;
+}
+
+// import/export ImGuiThemeTweaks
+ImGuiThemeTweaks& import_ImGuiThemeTweaks(const emscripten::val& value, ImGuiThemeTweaks& out) {
+    out.Rounding = import_value<float>(value["Rounding"]);
+    out.RoundingScrollbarRatio = import_value<float>(value["RoundingScrollbarRatio"]);
+    out.AlphaMultiplier = import_value<float>(value["AlphaMultiplier"]);
+    out.Hue = import_value<float>(value["Hue"]);
+    out.SaturationMultiplier = import_value<float>(value["SaturationMultiplier"]);
+    out.ValueMultiplierFront = import_value<float>(value["ValueMultiplierFront"]);
+    out.ValueMultiplierBg = import_value<float>(value["ValueMultiplierBg"]);
+    out.ValueMultiplierText = import_value<float>(value["ValueMultiplierText"]);
+    out.ValueMultiplierFrameBg = import_value<float>(value["ValueMultiplierFrameBg"]);
+    
+    return out;
+}
+
+ImGuiThemeTweaks import_ImGuiThemeTweaks(const emscripten::val& value) {
+    ImGuiThemeTweaks out; import_ImGuiThemeTweaks(value, out); return out;
+}
+
+emscripten::val export_ImGuiThemeTweaks(const ImGuiThemeTweaks& value, emscripten::val out) {
+
+    out.set("Rounding", export_value<float>(value.Rounding));
+    out.set("RoundingScrollbarRatio", export_value<float>(value.RoundingScrollbarRatio));
+    out.set("AlphaMultiplier", export_value<float>(value.AlphaMultiplier));
+    out.set("Hue", export_value<float>(value.Hue));
+    out.set("SaturationMultiplier", export_value<float>(value.SaturationMultiplier));
+    out.set("ValueMultiplierFront", export_value<float>(value.ValueMultiplierFront));
+    out.set("ValueMultiplierBg", export_value<float>(value.ValueMultiplierBg));
+    out.set("ValueMultiplierText", export_value<float>(value.ValueMultiplierText));
+    out.set("ValueMultiplierFrameBg", export_value<float>(value.ValueMultiplierFrameBg));
+    
+    return out;
+}
+
+emscripten::val export_ImGuiThemeTweaks(const ImGuiThemeTweaks& value) {
+    return export_ImGuiThemeTweaks(value, emscripten::val::object());
+}
+
+
+template <>
+ImGuiThemeTweaks import_value(const emscripten::val& value) {
+    return import_ImGuiThemeTweaks(value);
+}
+
+
+
+// import/export ImGuiTweakedTheme
+
+ImGuiTweakedTheme& import_ImGuiTweakedTheme(const emscripten::val& value, ImGuiTweakedTheme& out) {
+    out.Theme = (ImGuiTheme_)import_value<int>(value["Theme"]);
+    out.Tweaks = import_value<ImGuiThemeTweaks>(value["Tweaks"]);
+    return out;
+}
+
+ImGuiTweakedTheme import_ImGuiTweakedTheme(const emscripten::val& value) {
+    ImGuiTweakedTheme out; import_ImGuiTweakedTheme(value, out); return out;
+}
+
+emscripten::val export_ImGuiTweakedTheme(const ImGuiTweakedTheme& value, emscripten::val out) {
+    out.set("Theme", export_value<int>(value.Theme));
+    out.set("Tweaks", export_value<ImGuiThemeTweaks>(value.Tweaks));
+    return out;
+}
+
+emscripten::val export_ImGuiTweakedTheme(const ImGuiTweakedTheme& value) {
+    return export_ImGuiTweakedTheme(value, emscripten::val::object());
+}
+
+
+template <>
+ImGuiTweakedTheme import_value(const emscripten::val& value) {
+    return import_ImGuiTweakedTheme(value);
+}
+
+
+
+//void ApplyTheme(ImGuiTheme_ theme);
+//void ShowThemeTweakTab();
+//void ApplyTweakedTheme(const ImGuiTweakedTheme& tweaked_theme);
+EMSCRIPTEN_BINDINGS(ImGuiTheme) {
+
+    emscripten::function("ApplyTheme", FUNCTION(void, (ImGuiThemeIdx theme), {
+        ImGuiTheme::ApplyTheme((ImGuiTheme::ImGuiTheme_)theme);
+    }));
+
+    emscripten::function("ShowThemeTweakTab", &ImGuiTheme::ShowThemeTweakTab);
+    
+    emscripten::function("ApplyTweakedTheme", FUNCTION(void, (emscripten::val tweaked_theme), { 
+        ImGuiTheme::ApplyTweakedTheme(import_ImGuiTweakedTheme(tweaked_theme)); 
+    }));
+
+}
+//=========================================================================

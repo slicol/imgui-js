@@ -65,6 +65,12 @@ type ImGuiTreeNodeFlags = number;     // -> enum ImGuiTreeNodeFlags_   // Flags:
 type ImGuiViewportFlags = number;     // -> enum ImGuiViewportFlags_   // Flags: for ImGuiViewport
 type ImGuiWindowFlags = number;       // -> enum ImGuiWindowFlags_     // Flags: for Begin(), BeginChild()
 
+//========================================================================================
+// Add by slicol
+// define a enum type
+type ImGuiThemeIdx = number;            // -> enum ImGuiTheme::ImGuiTheme_  // Enum: A extension style identifier 
+//========================================================================================
+
 // Other types
 // #ifndef ImTextureID                 // ImTextureID [configurable type: override in imconfig.h with '#define ImTextureID xxx']
 // typedef void* ImTextureID;          // User data for rendering backend to identify a texture. This is whatever to you want it to be! read the FAQ about ImTextureID for details.
@@ -2060,4 +2066,39 @@ export interface Module extends Emscripten.EmscriptenModule {
     SetAllocatorFunctions(alloc_func: (sz: number, user_data: any) => number, free_func: (ptr: number, user_data: any) => void, user_data: any): void;
     MemAlloc(sz: number): any;
     MemFree(ptr: any): void;
+
+    //========================================================================================
+    // Add by slicol
+    // define a function
+    // ImGuiTheme
+
+    ApplyTheme(idx: ImGuiThemeIdx): void;
+    ShowThemeTweakTab(): void;
+    ApplyTweakedTheme(tweaked_theme: Readonly<interface_ImGuiTweakedTheme>): void;
+    //========================================================================================
 }
+
+//========================================================================================
+// Add by slicol
+export interface interface_ImGuiThemeTweaks {
+    Rounding: number;
+    RoundingScrollbarRatio: number;
+    AlphaMultiplier: number;
+    Hue: number;
+    SaturationMultiplier: number;
+    ValueMultiplierFront: number;
+    ValueMultiplierBg: number;
+    ValueMultiplierText: number;
+    ValueMultiplierFrameBg: number;
+}
+
+export interface reference_ImGuiThemeTweaks extends Emscripten.EmscriptenClassReference, interface_ImGuiThemeTweaks {}
+
+export interface interface_ImGuiTweakedTheme {
+    Theme: ImGuiThemeIdx;
+    Tweaks: interface_ImGuiThemeTweaks;
+}
+
+export interface reference_ImGuiTweakedTheme extends Emscripten.EmscriptenClassReference, interface_ImGuiTweakedTheme {}
+
+//========================================================================================

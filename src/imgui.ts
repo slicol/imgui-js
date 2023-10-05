@@ -4551,3 +4551,66 @@ export function SetAllocatorFunctions(alloc_func: (sz: number, user_data: any) =
 }
 export function MemAlloc(sz: number): void { bind.MemAlloc(sz); }
 export function MemFree(ptr: any): void { bind.MemFree(ptr); }
+
+
+//===========================================================================
+// Add by slicol
+// ImGuiTheme
+export enum ImGuiThemeIdx {
+    ImGuiTheme_ImGuiColorsClassic = 0,
+    ImGuiTheme_ImGuiColorsDark,
+    ImGuiTheme_ImGuiColorsLight,
+    ImGuiTheme_MaterialFlat,
+    ImGuiTheme_PhotoshopStyle,
+    ImGuiTheme_GrayVariations,
+    ImGuiTheme_GrayVariations_Darker,
+    ImGuiTheme_MicrosoftStyle,
+    ImGuiTheme_Cherry,
+    ImGuiTheme_Darcula,
+    ImGuiTheme_DarculaDarker,
+    ImGuiTheme_LightRounded,
+    ImGuiTheme_SoDark_AccentBlue,
+    ImGuiTheme_SoDark_AccentYellow,
+    ImGuiTheme_SoDark_AccentRed,
+    ImGuiTheme_BlackIsBlack,
+    ImGuiTheme_WhiteIsWhite,
+    ImGuiTheme_Count
+}
+
+export { interface_ImGuiThemeTweaks } from "bind-imgui";
+export { reference_ImGuiThemeTweaks } from "bind-imgui";
+
+export class ImGuiThemeTweaks implements Bind.interface_ImGuiThemeTweaks {
+    Rounding: number = 0.0;
+    RoundingScrollbarRatio: number = 0.0;
+    AlphaMultiplier: number = 0.0;
+    Hue: number = 0.0;
+    SaturationMultiplier: number = 0.0;
+    ValueMultiplierFront: number = 0.0;
+    ValueMultiplierBg: number = 0.0;
+    ValueMultiplierText: number = 0.0;
+    ValueMultiplierFrameBg: number = 0.0;
+}
+
+export { interface_ImGuiTweakedTheme } from "bind-imgui";
+export { reference_ImGuiTweakedTheme } from "bind-imgui";
+
+export class ImGuiTweakedTheme implements Bind.interface_ImGuiTweakedTheme {
+    Theme: ImGuiThemeIdx = ImGuiThemeIdx.ImGuiTheme_ImGuiColorsClassic;
+    Tweaks: ImGuiThemeTweaks = new ImGuiThemeTweaks();
+}
+
+
+export function ApplyTheme(idx: ImGuiThemeIdx): void {
+    bind.ApplyTheme(idx);
+}
+
+export function ShowThemeTweakTab(): void {
+    bind.ShowThemeTweakTab();
+}
+
+export function ApplyTweakedTheme(tweaked_theme: ImGuiTweakedTheme): void {
+    bind.ApplyTweakedTheme(tweaked_theme);
+}
+
+//===========================================================================

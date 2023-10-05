@@ -9,7 +9,7 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
             step((generator = generator.apply(thisArg, _arguments || [])).next());
         });
     };
-    var Bind, bind, config, IMGUI_VERSION, IMGUI_VERSION_NUM, IMGUI_HAS_TABLE, ImStringBuffer, ImGuiWindowFlags, ImGuiInputTextFlags, ImGuiTreeNodeFlags, ImGuiPopupFlags, ImGuiSelectableFlags, ImGuiComboFlags, ImGuiTabBarFlags, ImGuiTabItemFlags, ImGuiTableFlags, ImGuiTableColumnFlags, ImGuiTableRowFlags, ImGuiTableBgTarget, ImGuiFocusedFlags, ImGuiHoveredFlags, ImGuiDragDropFlags, IMGUI_PAYLOAD_TYPE_COLOR_3F, IMGUI_PAYLOAD_TYPE_COLOR_4F, ImGuiDataType, ImGuiDir, ImGuiSortDirection, ImGuiKey, ImGuiKeyModFlags, ImGuiNavInput, ImGuiConfigFlags, ImGuiCol, ImGuiStyleVar, ImGuiBackendFlags, ImGuiButtonFlags, ImGuiColorEditFlags, ImGuiSliderFlags, ImGuiMouseButton, ImGuiMouseCursor, ImGuiCond, ImDrawFlags, ImDrawListFlags, ImVec2, ImVec4, ImVector, IM_UNICODE_CODEPOINT_MAX, ImGuiTextFilter, ImGuiTextBuffer, ImGuiStorage, IM_COL32_R_SHIFT, IM_COL32_G_SHIFT, IM_COL32_B_SHIFT, IM_COL32_A_SHIFT, IM_COL32_A_MASK, IM_COL32_WHITE, IM_COL32_BLACK, IM_COL32_BLACK_TRANS, ImColor, ImGuiInputTextDefaultSize, ImGuiInputTextCallbackData, ImGuiSizeCallbackData, ImGuiTableColumnSortSpecs, ImGuiTableSortSpecs, ImGuiListClipper, IM_DRAWLIST_TEX_LINES_WIDTH_MAX, ImDrawCallback_ResetRenderState, ImDrawCmd, ImDrawIdxSize, ImDrawVertSize, ImDrawVertPosOffset, ImDrawVertUVOffset, ImDrawVertColOffset, ImDrawVert, ImDrawCmdHeader, ImDrawChannel, ImDrawListSharedData, ImDrawList, ImDrawData, script_ImFontConfig, ImFontConfig, script_ImFontGlyph, ImFontGlyph, ImFontAtlasCustomRect, ImFontAtlasFlags, ImFontAtlas, ImFont, ImGuiViewportFlags, ImGuiViewport, script_ImGuiStyle, ImGuiStyle, ImGuiIO, ImGuiContext, _ImGui_DragDropPayload_data;
+    var Bind, bind, config, IMGUI_VERSION, IMGUI_VERSION_NUM, IMGUI_HAS_TABLE, ImStringBuffer, ImGuiWindowFlags, ImGuiInputTextFlags, ImGuiTreeNodeFlags, ImGuiPopupFlags, ImGuiSelectableFlags, ImGuiComboFlags, ImGuiTabBarFlags, ImGuiTabItemFlags, ImGuiTableFlags, ImGuiTableColumnFlags, ImGuiTableRowFlags, ImGuiTableBgTarget, ImGuiFocusedFlags, ImGuiHoveredFlags, ImGuiDragDropFlags, IMGUI_PAYLOAD_TYPE_COLOR_3F, IMGUI_PAYLOAD_TYPE_COLOR_4F, ImGuiDataType, ImGuiDir, ImGuiSortDirection, ImGuiKey, ImGuiKeyModFlags, ImGuiNavInput, ImGuiConfigFlags, ImGuiCol, ImGuiStyleVar, ImGuiBackendFlags, ImGuiButtonFlags, ImGuiColorEditFlags, ImGuiSliderFlags, ImGuiMouseButton, ImGuiMouseCursor, ImGuiCond, ImDrawFlags, ImDrawListFlags, ImVec2, ImVec4, ImVector, IM_UNICODE_CODEPOINT_MAX, ImGuiTextFilter, ImGuiTextBuffer, ImGuiStorage, IM_COL32_R_SHIFT, IM_COL32_G_SHIFT, IM_COL32_B_SHIFT, IM_COL32_A_SHIFT, IM_COL32_A_MASK, IM_COL32_WHITE, IM_COL32_BLACK, IM_COL32_BLACK_TRANS, ImColor, ImGuiInputTextDefaultSize, ImGuiInputTextCallbackData, ImGuiSizeCallbackData, ImGuiTableColumnSortSpecs, ImGuiTableSortSpecs, ImGuiListClipper, IM_DRAWLIST_TEX_LINES_WIDTH_MAX, ImDrawCallback_ResetRenderState, ImDrawCmd, ImDrawIdxSize, ImDrawVertSize, ImDrawVertPosOffset, ImDrawVertUVOffset, ImDrawVertColOffset, ImDrawVert, ImDrawCmdHeader, ImDrawChannel, ImDrawListSharedData, ImDrawList, ImDrawData, script_ImFontConfig, ImFontConfig, script_ImFontGlyph, ImFontGlyph, ImFontAtlasCustomRect, ImFontAtlasFlags, ImFontAtlas, ImFont, ImGuiViewportFlags, ImGuiViewport, script_ImGuiStyle, ImGuiStyle, ImGuiIO, ImGuiContext, _ImGui_DragDropPayload_data, ImGuiThemeIdx, ImGuiThemeTweaks, ImGuiTweakedTheme;
     var __moduleName = context_1 && context_1.id;
     function default_1(value) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -2233,6 +2233,18 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
     exports_1("MemAlloc", MemAlloc);
     function MemFree(ptr) { bind.MemFree(ptr); }
     exports_1("MemFree", MemFree);
+    function ApplyTheme(idx) {
+        bind.ApplyTheme(idx);
+    }
+    exports_1("ApplyTheme", ApplyTheme);
+    function ShowThemeTweakTab() {
+        bind.ShowThemeTweakTab();
+    }
+    exports_1("ShowThemeTweakTab", ShowThemeTweakTab);
+    function ApplyTweakedTheme(tweaked_theme) {
+        bind.ApplyTweakedTheme(tweaked_theme);
+    }
+    exports_1("ApplyTweakedTheme", ApplyTweakedTheme);
     return {
         setters: [
             function (Bind_1) {
@@ -4688,6 +4700,51 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
             // IMGUI_API void                  EndDragDropTarget();                                                            // only call EndDragDropTarget() if BeginDragDropTarget() returns true!
             // IMGUI_API const ImGuiPayload*   GetDragDropPayload();                                                           // peek directly into the current payload from anywhere. may return NULL. use ImGuiPayload::IsDataType() to test for the payload type.
             _ImGui_DragDropPayload_data = {};
+            //===========================================================================
+            // Add by slicol
+            // ImGuiTheme
+            (function (ImGuiThemeIdx) {
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_ImGuiColorsClassic"] = 0] = "ImGuiTheme_ImGuiColorsClassic";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_ImGuiColorsDark"] = 1] = "ImGuiTheme_ImGuiColorsDark";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_ImGuiColorsLight"] = 2] = "ImGuiTheme_ImGuiColorsLight";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_MaterialFlat"] = 3] = "ImGuiTheme_MaterialFlat";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_PhotoshopStyle"] = 4] = "ImGuiTheme_PhotoshopStyle";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_GrayVariations"] = 5] = "ImGuiTheme_GrayVariations";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_GrayVariations_Darker"] = 6] = "ImGuiTheme_GrayVariations_Darker";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_MicrosoftStyle"] = 7] = "ImGuiTheme_MicrosoftStyle";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_Cherry"] = 8] = "ImGuiTheme_Cherry";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_Darcula"] = 9] = "ImGuiTheme_Darcula";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_DarculaDarker"] = 10] = "ImGuiTheme_DarculaDarker";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_LightRounded"] = 11] = "ImGuiTheme_LightRounded";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_SoDark_AccentBlue"] = 12] = "ImGuiTheme_SoDark_AccentBlue";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_SoDark_AccentYellow"] = 13] = "ImGuiTheme_SoDark_AccentYellow";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_SoDark_AccentRed"] = 14] = "ImGuiTheme_SoDark_AccentRed";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_BlackIsBlack"] = 15] = "ImGuiTheme_BlackIsBlack";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_WhiteIsWhite"] = 16] = "ImGuiTheme_WhiteIsWhite";
+                ImGuiThemeIdx[ImGuiThemeIdx["ImGuiTheme_Count"] = 17] = "ImGuiTheme_Count";
+            })(ImGuiThemeIdx || (ImGuiThemeIdx = {}));
+            exports_1("ImGuiThemeIdx", ImGuiThemeIdx);
+            ImGuiThemeTweaks = class ImGuiThemeTweaks {
+                constructor() {
+                    this.Rounding = 0.0;
+                    this.RoundingScrollbarRatio = 0.0;
+                    this.AlphaMultiplier = 0.0;
+                    this.Hue = 0.0;
+                    this.SaturationMultiplier = 0.0;
+                    this.ValueMultiplierFront = 0.0;
+                    this.ValueMultiplierBg = 0.0;
+                    this.ValueMultiplierText = 0.0;
+                    this.ValueMultiplierFrameBg = 0.0;
+                }
+            };
+            exports_1("ImGuiThemeTweaks", ImGuiThemeTweaks);
+            ImGuiTweakedTheme = class ImGuiTweakedTheme {
+                constructor() {
+                    this.Theme = ImGuiThemeIdx.ImGuiTheme_ImGuiColorsClassic;
+                    this.Tweaks = new ImGuiThemeTweaks();
+                }
+            };
+            exports_1("ImGuiTweakedTheme", ImGuiTweakedTheme);
         }
     };
 });

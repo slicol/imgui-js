@@ -1643,3 +1643,45 @@ export declare function DebugCheckVersionAndDataLayout(version_str: string, sz_i
 export declare function SetAllocatorFunctions(alloc_func: (sz: number, user_data: any) => number, free_func: (ptr: number, user_data: any) => void, user_data?: any): void;
 export declare function MemAlloc(sz: number): void;
 export declare function MemFree(ptr: any): void;
+export declare enum ImGuiThemeIdx {
+    ImGuiTheme_ImGuiColorsClassic = 0,
+    ImGuiTheme_ImGuiColorsDark = 1,
+    ImGuiTheme_ImGuiColorsLight = 2,
+    ImGuiTheme_MaterialFlat = 3,
+    ImGuiTheme_PhotoshopStyle = 4,
+    ImGuiTheme_GrayVariations = 5,
+    ImGuiTheme_GrayVariations_Darker = 6,
+    ImGuiTheme_MicrosoftStyle = 7,
+    ImGuiTheme_Cherry = 8,
+    ImGuiTheme_Darcula = 9,
+    ImGuiTheme_DarculaDarker = 10,
+    ImGuiTheme_LightRounded = 11,
+    ImGuiTheme_SoDark_AccentBlue = 12,
+    ImGuiTheme_SoDark_AccentYellow = 13,
+    ImGuiTheme_SoDark_AccentRed = 14,
+    ImGuiTheme_BlackIsBlack = 15,
+    ImGuiTheme_WhiteIsWhite = 16,
+    ImGuiTheme_Count = 17
+}
+export { interface_ImGuiThemeTweaks } from "bind-imgui";
+export { reference_ImGuiThemeTweaks } from "bind-imgui";
+export declare class ImGuiThemeTweaks implements Bind.interface_ImGuiThemeTweaks {
+    Rounding: number;
+    RoundingScrollbarRatio: number;
+    AlphaMultiplier: number;
+    Hue: number;
+    SaturationMultiplier: number;
+    ValueMultiplierFront: number;
+    ValueMultiplierBg: number;
+    ValueMultiplierText: number;
+    ValueMultiplierFrameBg: number;
+}
+export { interface_ImGuiTweakedTheme } from "bind-imgui";
+export { reference_ImGuiTweakedTheme } from "bind-imgui";
+export declare class ImGuiTweakedTheme implements Bind.interface_ImGuiTweakedTheme {
+    Theme: ImGuiThemeIdx;
+    Tweaks: ImGuiThemeTweaks;
+}
+export declare function ApplyTheme(idx: ImGuiThemeIdx): void;
+export declare function ShowThemeTweakTab(): void;
+export declare function ApplyTweakedTheme(tweaked_theme: ImGuiTweakedTheme): void;

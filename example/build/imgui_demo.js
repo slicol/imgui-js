@@ -1198,7 +1198,9 @@ System.register(["imgui-js"], function (exports_1, context_1) {
                             // int* p_int = (int*)data.UserData;
                             // *p_int = *p_int + 1;
                             ImGui.ASSERT(data.UserData !== null);
-                            data.UserData(data.UserData() + 1);
+                            if (data.UserData != null) {
+                                data.UserData(data.UserData() + 1);
+                            }
                         }
                         return 0;
                     }
@@ -6671,32 +6673,34 @@ System.register(["imgui-js"], function (exports_1, context_1) {
                     const a = /*(const MyItem*)*/ lhs;
                     const b = /*(const MyItem*)*/ rhs;
                     ImGui.ASSERT(MyItem.s_current_sort_specs !== null);
-                    for (let n = 0; n < MyItem.s_current_sort_specs.SpecsCount; n++) {
-                        // Here we identify columns using the ColumnUserID value that we ourselves passed to TableSetupColumn()
-                        // We could also choose to identify columns based on their index (sort_spec.ColumnIndex), which is simpler!
-                        const sort_spec = MyItem.s_current_sort_specs.Specs[n];
-                        let delta = 0;
-                        switch (sort_spec.ColumnUserID) {
-                            case MyItemColumnID.ID:
-                                delta = (a.ID - b.ID);
-                                break;
-                            case MyItemColumnID.Name:
-                                delta = (a.Name.localeCompare(b.Name));
-                                break;
-                            case MyItemColumnID.Quantity:
-                                delta = (a.Quantity - b.Quantity);
-                                break;
-                            case MyItemColumnID.Description:
-                                delta = (a.Name.localeCompare(b.Name));
-                                break;
-                            default:
-                                ImGui.ASSERT(0);
-                                break;
+                    if (MyItem.s_current_sort_specs) {
+                        for (let n = 0; n < MyItem.s_current_sort_specs.SpecsCount; n++) {
+                            // Here we identify columns using the ColumnUserID value that we ourselves passed to TableSetupColumn()
+                            // We could also choose to identify columns based on their index (sort_spec.ColumnIndex), which is simpler!
+                            const sort_spec = MyItem.s_current_sort_specs.Specs[n];
+                            let delta = 0;
+                            switch (sort_spec.ColumnUserID) {
+                                case MyItemColumnID.ID:
+                                    delta = (a.ID - b.ID);
+                                    break;
+                                case MyItemColumnID.Name:
+                                    delta = (a.Name.localeCompare(b.Name));
+                                    break;
+                                case MyItemColumnID.Quantity:
+                                    delta = (a.Quantity - b.Quantity);
+                                    break;
+                                case MyItemColumnID.Description:
+                                    delta = (a.Name.localeCompare(b.Name));
+                                    break;
+                                default:
+                                    ImGui.ASSERT(0);
+                                    break;
+                            }
+                            if (delta > 0)
+                                return (sort_spec.SortDirection === ImGui.SortDirection.Ascending) ? +1 : -1;
+                            if (delta < 0)
+                                return (sort_spec.SortDirection === ImGui.SortDirection.Ascending) ? -1 : +1;
                         }
-                        if (delta > 0)
-                            return (sort_spec.SortDirection === ImGui.SortDirection.Ascending) ? +1 : -1;
-                        if (delta < 0)
-                            return (sort_spec.SortDirection === ImGui.SortDirection.Ascending) ? -1 : +1;
                     }
                     // qsort() is instable so always return a way to differenciate items.
                     // Your own compare function may want to avoid fallback on implicit sort specs e.g. a Name compare if it wasn't already part of the sort specs.
@@ -6940,7 +6944,9 @@ System.register(["imgui-js"], function (exports_1, context_1) {
                 static TextEditCallbackStub(data) {
                     const console = data.UserData;
                     ImGui.ASSERT(console);
-                    return console.TextEditCallback(data);
+                    if (console)
+                        return console.TextEditCallback(data);
+                    return 0;
                 }
                 TextEditCallback(data) {
                     //this.AddLog("cursor: %d, selection: %d-%d", data.CursorPos, data.SelectionStart, data.SelectionEnd);

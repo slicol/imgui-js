@@ -84,6 +84,7 @@ async function _init(): Promise<void> {
     io.FontDefault = font;
 
     // Setup Platform/Renderer backends
+    io.BackendFlags = io.BackendFlags | ImGui.BackendFlags.RendererHasVtxOffset;
     // ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
     // ImGui_ImplOpenGL3_Init(glsl_version);
     if (typeof(window) !== "undefined") {

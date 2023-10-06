@@ -330,12 +330,19 @@ export class MemoryEditor
                             const user_data: UserData | null = data.UserData;
                             ImGui.ASSERT(user_data !== null);
                             if (!data.HasSelection())
-                                user_data.CursorPos = data.CursorPos;
+                            {
+                                if(user_data) user_data.CursorPos = data.CursorPos;
+                            }
+                                
                             if (data.SelectionStart === 0 && data.SelectionEnd === data.BufTextLen)
                             {
                                 // When not editing a byte, always rewrite its content (this is a bit tricky, since InputText technically "owns" the master copy of the buffer we edit it in there)
                                 data.DeleteChars(0, data.BufTextLen);
-                                data.InsertChars(0, user_data.CurrentBufOverwrite.buffer);
+                                if(user_data)
+                                {
+                                    data.InsertChars(0, user_data.CurrentBufOverwrite.buffer);
+                                }
+                                
                                 data.SelectionStart = 0;
                                 data.SelectionEnd = 2;
                                 data.CursorPos = 0;

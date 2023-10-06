@@ -1682,6 +1682,13 @@ export declare class ImGuiTweakedTheme implements Bind.interface_ImGuiTweakedThe
     Theme: ImGuiThemeIdx;
     Tweaks: ImGuiThemeTweaks;
 }
-export declare function ApplyTheme(idx: ImGuiThemeIdx): void;
-export declare function ShowThemeTweakTab(): void;
-export declare function ApplyTweakedTheme(tweaked_theme: ImGuiTweakedTheme): void;
+export declare class ImGuiTheme {
+    static ApplyTheme(idx: ImGuiThemeIdx): void;
+    static ShowThemeTweakTab(): void;
+    static ApplyTweakedTheme(tweaked_theme: ImGuiTweakedTheme): void;
+}
+export declare class ImPlot {
+    static CreateContext(): void;
+    static DestroyContext(): void;
+    static ShowDemoWindow(): void;
+}

@@ -9,7 +9,7 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
             step((generator = generator.apply(thisArg, _arguments || [])).next());
         });
     };
-    var Bind, bind, config, IMGUI_VERSION, IMGUI_VERSION_NUM, IMGUI_HAS_TABLE, ImStringBuffer, ImGuiWindowFlags, ImGuiInputTextFlags, ImGuiTreeNodeFlags, ImGuiPopupFlags, ImGuiSelectableFlags, ImGuiComboFlags, ImGuiTabBarFlags, ImGuiTabItemFlags, ImGuiTableFlags, ImGuiTableColumnFlags, ImGuiTableRowFlags, ImGuiTableBgTarget, ImGuiFocusedFlags, ImGuiHoveredFlags, ImGuiDragDropFlags, IMGUI_PAYLOAD_TYPE_COLOR_3F, IMGUI_PAYLOAD_TYPE_COLOR_4F, ImGuiDataType, ImGuiDir, ImGuiSortDirection, ImGuiKey, ImGuiKeyModFlags, ImGuiNavInput, ImGuiConfigFlags, ImGuiCol, ImGuiStyleVar, ImGuiBackendFlags, ImGuiButtonFlags, ImGuiColorEditFlags, ImGuiSliderFlags, ImGuiMouseButton, ImGuiMouseCursor, ImGuiCond, ImDrawFlags, ImDrawListFlags, ImVec2, ImVec4, ImVector, IM_UNICODE_CODEPOINT_MAX, ImGuiTextFilter, ImGuiTextBuffer, ImGuiStorage, IM_COL32_R_SHIFT, IM_COL32_G_SHIFT, IM_COL32_B_SHIFT, IM_COL32_A_SHIFT, IM_COL32_A_MASK, IM_COL32_WHITE, IM_COL32_BLACK, IM_COL32_BLACK_TRANS, ImColor, ImGuiInputTextDefaultSize, ImGuiInputTextCallbackData, ImGuiSizeCallbackData, ImGuiTableColumnSortSpecs, ImGuiTableSortSpecs, ImGuiListClipper, IM_DRAWLIST_TEX_LINES_WIDTH_MAX, ImDrawCallback_ResetRenderState, ImDrawCmd, ImDrawIdxSize, ImDrawVertSize, ImDrawVertPosOffset, ImDrawVertUVOffset, ImDrawVertColOffset, ImDrawVert, ImDrawCmdHeader, ImDrawChannel, ImDrawListSharedData, ImDrawList, ImDrawData, script_ImFontConfig, ImFontConfig, script_ImFontGlyph, ImFontGlyph, ImFontAtlasCustomRect, ImFontAtlasFlags, ImFontAtlas, ImFont, ImGuiViewportFlags, ImGuiViewport, script_ImGuiStyle, ImGuiStyle, ImGuiIO, ImGuiContext, _ImGui_DragDropPayload_data, ImGuiThemeIdx, ImGuiThemeTweaks, ImGuiTweakedTheme;
+    var Bind, bind, config, IMGUI_VERSION, IMGUI_VERSION_NUM, IMGUI_HAS_TABLE, ImStringBuffer, ImGuiWindowFlags, ImGuiInputTextFlags, ImGuiTreeNodeFlags, ImGuiPopupFlags, ImGuiSelectableFlags, ImGuiComboFlags, ImGuiTabBarFlags, ImGuiTabItemFlags, ImGuiTableFlags, ImGuiTableColumnFlags, ImGuiTableRowFlags, ImGuiTableBgTarget, ImGuiFocusedFlags, ImGuiHoveredFlags, ImGuiDragDropFlags, IMGUI_PAYLOAD_TYPE_COLOR_3F, IMGUI_PAYLOAD_TYPE_COLOR_4F, ImGuiDataType, ImGuiDir, ImGuiSortDirection, ImGuiKey, ImGuiKeyModFlags, ImGuiNavInput, ImGuiConfigFlags, ImGuiCol, ImGuiStyleVar, ImGuiBackendFlags, ImGuiButtonFlags, ImGuiColorEditFlags, ImGuiSliderFlags, ImGuiMouseButton, ImGuiMouseCursor, ImGuiCond, ImDrawFlags, ImDrawListFlags, ImVec2, ImVec4, ImVector, IM_UNICODE_CODEPOINT_MAX, ImGuiTextFilter, ImGuiTextBuffer, ImGuiStorage, IM_COL32_R_SHIFT, IM_COL32_G_SHIFT, IM_COL32_B_SHIFT, IM_COL32_A_SHIFT, IM_COL32_A_MASK, IM_COL32_WHITE, IM_COL32_BLACK, IM_COL32_BLACK_TRANS, ImColor, ImGuiInputTextDefaultSize, ImGuiInputTextCallbackData, ImGuiSizeCallbackData, ImGuiTableColumnSortSpecs, ImGuiTableSortSpecs, ImGuiListClipper, IM_DRAWLIST_TEX_LINES_WIDTH_MAX, ImDrawCallback_ResetRenderState, ImDrawCmd, ImDrawIdxSize, ImDrawVertSize, ImDrawVertPosOffset, ImDrawVertUVOffset, ImDrawVertColOffset, ImDrawVert, ImDrawCmdHeader, ImDrawChannel, ImDrawListSharedData, ImDrawList, ImDrawData, script_ImFontConfig, ImFontConfig, script_ImFontGlyph, ImFontGlyph, ImFontAtlasCustomRect, ImFontAtlasFlags, ImFontAtlas, ImFont, ImGuiViewportFlags, ImGuiViewport, script_ImGuiStyle, ImGuiStyle, ImGuiIO, ImGuiContext, _ImGui_DragDropPayload_data, ImGuiThemeIdx, ImGuiThemeTweaks, ImGuiTweakedTheme, ImGuiTheme, ImPlot;
     var __moduleName = context_1 && context_1.id;
     function default_1(value) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -2233,18 +2233,6 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
     exports_1("MemAlloc", MemAlloc);
     function MemFree(ptr) { bind.MemFree(ptr); }
     exports_1("MemFree", MemFree);
-    function ApplyTheme(idx) {
-        bind.ApplyTheme(idx);
-    }
-    exports_1("ApplyTheme", ApplyTheme);
-    function ShowThemeTweakTab() {
-        bind.ShowThemeTweakTab();
-    }
-    exports_1("ShowThemeTweakTab", ShowThemeTweakTab);
-    function ApplyTweakedTheme(tweaked_theme) {
-        bind.ApplyTweakedTheme(tweaked_theme);
-    }
-    exports_1("ApplyTweakedTheme", ApplyTweakedTheme);
     return {
         setters: [
             function (Bind_1) {
@@ -4362,7 +4350,8 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
                             return this.native._getAt_KeyMap(Number(key));
                         },
                         set: (target, key, value) => {
-                            return this.native._setAt_KeyMap(Number(key), value);
+                            return true;
+                            //return this.native._setAt_KeyMap(Number(key), value);
                         },
                     });
                     // bool        MouseDown[5];               // Mouse buttons: left, right, middle + extras. ImGui itself mostly only uses left button (BeginPopupContext** are using right button). Others buttons allows us to track if the mouse is being used by your application + available to user as a convenience via IsMouse** API.
@@ -4745,6 +4734,30 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
                 }
             };
             exports_1("ImGuiTweakedTheme", ImGuiTweakedTheme);
+            ImGuiTheme = class ImGuiTheme {
+                static ApplyTheme(idx) {
+                    bind.ImGuiTheme_ApplyTheme(idx);
+                }
+                static ShowThemeTweakTab() {
+                    bind.ImGuiTheme_ShowThemeTweakTab();
+                }
+                static ApplyTweakedTheme(tweaked_theme) {
+                    bind.ImGuiTheme_ApplyTweakedTheme(tweaked_theme);
+                }
+            };
+            exports_1("ImGuiTheme", ImGuiTheme);
+            ImPlot = class ImPlot {
+                static CreateContext() {
+                    bind.ImPlot_CreateContext();
+                }
+                static DestroyContext() {
+                    bind.ImPlot_DestroyContext();
+                }
+                static ShowDemoWindow() {
+                    bind.ImPlot_ShowDemoWindow();
+                }
+            };
+            exports_1("ImPlot", ImPlot);
         }
     };
 });

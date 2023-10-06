@@ -2072,9 +2072,15 @@ export interface Module extends Emscripten.EmscriptenModule {
     // define a function
     // ImGuiTheme
 
-    ApplyTheme(idx: ImGuiThemeIdx): void;
-    ShowThemeTweakTab(): void;
-    ApplyTweakedTheme(tweaked_theme: Readonly<interface_ImGuiTweakedTheme>): void;
+    ImGuiTheme_ApplyTheme(idx: ImGuiThemeIdx): void;
+    ImGuiTheme_ShowThemeTweakTab(): void;
+    ImGuiTheme_ApplyTweakedTheme(tweaked_theme: Readonly<interface_ImGuiTweakedTheme>): void;
+
+    // ImPlot
+    ImPlot_CreateContext(): void;
+    ImPlot_DestroyContext(): void;
+    ImPlot_ShowDemoWindow(): void;
+
     //========================================================================================
 }
 

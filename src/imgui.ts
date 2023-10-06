@@ -86,6 +86,7 @@ function export_Color4(tuple: Bind.ImTuple4<number>, col: RGBA | Bind.ImTuple4<n
 }
 
 import * as config from "./imconfig.js";
+import exp from "constants";
 
 export { IMGUI_VERSION as VERSION }
 export const IMGUI_VERSION: string = "1.86"; // bind.IMGUI_VERSION;
@@ -2520,7 +2521,8 @@ export class ImGuiIO
             return this.native._getAt_KeyMap(Number(key));
         },
         set: (target: number[], key: PropertyKey, value: number): boolean => {
-            return this.native._setAt_KeyMap(Number(key), value);
+            return true;
+            //return this.native._setAt_KeyMap(Number(key), value);
         },
     });
     // float         KeyRepeatDelay;           // = 0.250f             // When holding a key/button, time before it starts repeating, in seconds (for buttons in Repeat mode, etc.).
@@ -4601,16 +4603,36 @@ export class ImGuiTweakedTheme implements Bind.interface_ImGuiTweakedTheme {
 }
 
 
-export function ApplyTheme(idx: ImGuiThemeIdx): void {
-    bind.ApplyTheme(idx);
+export class ImGuiTheme
+{
+    static ApplyTheme(idx: ImGuiThemeIdx): void {
+        bind.ImGuiTheme_ApplyTheme(idx);
+    }
+    
+    static ShowThemeTweakTab(): void {
+        bind.ImGuiTheme_ShowThemeTweakTab();
+    }
+    
+    static ApplyTweakedTheme(tweaked_theme: ImGuiTweakedTheme): void {
+        bind.ImGuiTheme_ApplyTweakedTheme(tweaked_theme);
+    }
 }
 
-export function ShowThemeTweakTab(): void {
-    bind.ShowThemeTweakTab();
+export class ImPlot
+{
+    static CreateContext(): void {
+        bind.ImPlot_CreateContext();
+    }
+
+    static DestroyContext(): void {
+        bind.ImPlot_DestroyContext();
+    }
+
+    static ShowDemoWindow(): void {
+        bind.ImPlot_ShowDemoWindow();
+    }
+    
 }
 
-export function ApplyTweakedTheme(tweaked_theme: ImGuiTweakedTheme): void {
-    bind.ApplyTweakedTheme(tweaked_theme);
-}
 
 //===========================================================================

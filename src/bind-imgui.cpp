@@ -1,5 +1,7 @@
 #include "imgui.h"
 #include "imgui_theme.h"
+#include "implot.h"
+
 using namespace ImGuiTheme;
 
 #ifndef __FLT_MAX__
@@ -951,8 +953,12 @@ EMSCRIPTEN_BINDINGS(ImFont) {
         CLASS_MEMBER(ImFont, FallbackChar)
         // ImWchar                     EllipsisChar;       // 2     // out // = -1       // Character used for ellipsis rendering.
         CLASS_MEMBER(ImFont, EllipsisChar)
+
+        //-------------------------------------------------------
+        // Modify by slicol to upgrade imgui
         // ImWchar                     DotChar;
-        CLASS_MEMBER(ImFont, DotChar)
+        // CLASS_MEMBER(ImFont, DotChar)
+        //-------------------------------------------------------
 
         // Members: Cold ~18/26 bytes
         // short                       ConfigDataCount;    // ~ 1          // Number of ImFontConfig involved in creating this font. Bigger than 1 when merging multiple font sources into one ImFont.
@@ -1487,8 +1493,14 @@ EMSCRIPTEN_BINDINGS(ImGuiIO) {
         .function("AddInputCharactersUTF8", FUNCTION(void, (ImGuiIO& that, std::string utf8_chars), {
             that.AddInputCharactersUTF8(utf8_chars.c_str());
         }), emscripten::allow_raw_pointers())
+
+        //******************************************************************
+        // Modify by slicol to upgrade imgui
         // inline void    ClearInputCharacters() { InputCharacters[0] = 0; }   // Clear the text input buffer manually
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS        
         CLASS_METHOD(ImGuiIO, ClearInputCharacters)
+#endif        
+        //******************************************************************
 
         //------------------------------------------------------------------
         // Output - Retrieve after calling NewFrame()
@@ -1518,8 +1530,13 @@ EMSCRIPTEN_BINDINGS(ImGuiIO) {
         CLASS_MEMBER(ImGuiIO, MetricsRenderWindows)
         // int         MetricsActiveWindows;       // Number of visible root windows (exclude child windows)
         CLASS_MEMBER(ImGuiIO, MetricsActiveWindows)
+
+        //******************************************************************
+        //Modify by slicol to upgrade imgui
         // int         MetricsActiveAllocations;   // Number of active allocations, updated by MemAlloc/MemFree based on current context. May be off if you have multiple imgui contexts.
-        CLASS_MEMBER(ImGuiIO, MetricsActiveAllocations)
+        //CLASS_MEMBER(ImGuiIO, MetricsActiveAllocations)
+        //******************************************************************
+
         // ImVec2      MouseDelta;                 // Mouse delta. Note that this is zero if either current or previous position are invalid (-FLT_MAX,-FLT_MAX), so a disappearing/reappearing mouse won't have a huge delta.
         CLASS_MEMBER_GET_RAW_REFERENCE(ImGuiIO, MouseDelta)
 
@@ -1548,15 +1565,27 @@ EMSCRIPTEN_BINDINGS(ImGuiIO) {
         // float       MouseDownDurationPrev[5];   // Previous time the mouse button has been down
         // ImVec2      MouseDragMaxDistanceAbs[5]; // Maximum distance, absolute, on each axis, of how much mouse has traveled from the clicking point
         // float       MouseDragMaxDistanceSqr[5]; // Squared maximum distance of how much mouse has traveled from the clicking point
+
+        //-------------------------------------------------------
+        // Modify by slicol to upgrade imgui 
+        // If prior to 1.87 you used io.KeysDownDuration[] (which was marked as internal), you should use GetKeyData(key)->DownDuration and *NOT* io.KeysData[key]->DownDuration.
+        //
         // float       KeysDownDuration[512];      // Duration the keyboard key has been down (0.0f == just pressed)
-        .function("_getAt_KeysDownDuration", FUNCTION(float, (const ImGuiIO& that, int index), {
-            return (0 <= index && index < IM_ARRAYSIZE(that.KeysDownDuration)) ? that.KeysDownDuration[index] : -1.0f;
-        }))
+        //.function("_getAt_KeysDownDuration", FUNCTION(float, (const ImGuiIO& that, int index), {
+        //    return (0 <= index && index < IM_ARRAYSIZE(that.KeysDownDuration)) ? that.KeysDownDuration[index] : -1.0f;
+        //}))
+        //-------------------------------------------------------
+        
         // float       KeysDownDurationPrev[512];  // Previous duration the key has been down
+
+        //-------------------------------------------------------
+        // Modify by slicol to upgrade imgui
         // float       NavInputsDownDuration[ImGuiNavInput_COUNT];
-        .function("_getAt_NavInputsDownDuration", FUNCTION(float, (const ImGuiIO& that, ImGuiNavInput index), {
-            return (0 <= index && index < ImGuiNavInput_COUNT) ? that.NavInputsDownDuration[index] : -1.0f;
-        }))
+        //.function("_getAt_NavInputsDownDuration", FUNCTION(float, (const ImGuiIO& that, ImGuiNavInput index), {
+        //    return (0 <= index && index < ImGuiNavInput_COUNT) ? that.NavInputsDownDuration[index] : -1.0f;
+        //}))
+        //-------------------------------------------------------
+
         // float       NavInputsDownDurationPrev[ImGuiNavInput_COUNT];
 
         // IMGUI_API   ImGuiIO();
@@ -2510,6 +2539,9 @@ EMSCRIPTEN_BINDINGS(ImGui) {
         return ImGui::BeginListBox(label.c_str(), import_ImVec2(size));
     }));
     emscripten::function("EndListBox", &ImGui::EndListBox);
+
+    //Modify by slicol to upgrade imgui
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS        
     emscripten::function("ListBox_A", FUNCTION(bool, (std::string label, emscripten::val current_item, emscripten::val items, int items_count, int height_in_items), {
         WrapImGuiContext* ctx = WrapImGuiContext::GetCurrentContext();
         ctx->_ImGui_ListBox_A_items = items;
@@ -2525,6 +2557,10 @@ EMSCRIPTEN_BINDINGS(ImGui) {
             }
         }), NULL, items_count, height_in_items);
     }));
+#endif    
+
+    //Modify by slicol to upgrade imgui
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS    
     emscripten::function("ListBox_B", FUNCTION(bool, (std::string label, emscripten::val current_item, emscripten::val items_getter, emscripten::val data, int items_count, int height_in_items), {
         WrapImGuiContext* ctx = WrapImGuiContext::GetCurrentContext();
         ctx->_ImGui_ListBox_B_items_getter = items_getter;
@@ -2545,6 +2581,7 @@ EMSCRIPTEN_BINDINGS(ImGui) {
             }
         }), NULL, items_count, height_in_items);
     }));
+#endif    
 
     // Widgets: Data Plotting
     // IMGUI_API void          PlotLines(const char* label, const float* values, int values_count, int values_offset = 0, const char* overlay_text = NULL, float scale_min = FLT_MAX, float scale_max = FLT_MAX, ImVec2 graph_size = ImVec2(0, 0), int stride = sizeof(float));
@@ -2861,7 +2898,11 @@ EMSCRIPTEN_BINDINGS(ImGui) {
     emscripten::function("GetItemRectMin", FUNCTION(emscripten::val, (emscripten::val out), { return export_ImVec2(ImGui::GetItemRectMin(), out); }));
     emscripten::function("GetItemRectMax", FUNCTION(emscripten::val, (emscripten::val out), { return export_ImVec2(ImGui::GetItemRectMax(), out); }));
     emscripten::function("GetItemRectSize", FUNCTION(emscripten::val, (emscripten::val out), { return export_ImVec2(ImGui::GetItemRectSize(), out); }));
+
+    //Modify by slicol to upgrade imgui
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS    
     emscripten::function("SetItemAllowOverlap", &ImGui::SetItemAllowOverlap);
+#endif
 
     // Viewports
     // - Currently represents the Platform Window created by the application which is hosting our Dear ImGui windows.
@@ -2932,7 +2973,11 @@ EMSCRIPTEN_BINDINGS(ImGui) {
     emscripten::function("IsKeyPressed", &ImGui::IsKeyPressed);
     emscripten::function("IsKeyReleased", &ImGui::IsKeyReleased);
     emscripten::function("GetKeyPressedAmount", &ImGui::GetKeyPressedAmount);
+
+    //Modify by slicol to upgrade imgui
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS    
     emscripten::function("CaptureKeyboardFromApp", &ImGui::CaptureKeyboardFromApp);
+#endif
 
     // Inputs Utilities: Mouse
     // - To refer to a mouse button, you may use named enums in your code e.g. ImGuiMouseButton_Left, ImGuiMouseButton_Right.
@@ -2969,7 +3014,11 @@ EMSCRIPTEN_BINDINGS(ImGui) {
     emscripten::function("ResetMouseDragDelta", &ImGui::ResetMouseDragDelta);
     emscripten::function("GetMouseCursor", &ImGui::GetMouseCursor);
     emscripten::function("SetMouseCursor", &ImGui::SetMouseCursor);
+
+    //Modify by slicol to upgrade imgui
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS    
     emscripten::function("CaptureMouseFromApp", &ImGui::CaptureMouseFromApp);
+#endif    
 
     // Clipboard Utilities
     // - Also see the LogToClipboard() function to capture GUI into clipboard, or easily output text data to the clipboard.
@@ -3162,17 +3211,26 @@ ImGuiTweakedTheme import_value(const emscripten::val& value) {
 //void ApplyTheme(ImGuiTheme_ theme);
 //void ShowThemeTweakTab();
 //void ApplyTweakedTheme(const ImGuiTweakedTheme& tweaked_theme);
-EMSCRIPTEN_BINDINGS(ImGuiTheme) {
-
-    emscripten::function("ApplyTheme", FUNCTION(void, (ImGuiThemeIdx theme), {
-        ImGuiTheme::ApplyTheme((ImGuiTheme::ImGuiTheme_)theme);
-    }));
-
-    emscripten::function("ShowThemeTweakTab", &ImGuiTheme::ShowThemeTweakTab);
+EMSCRIPTEN_BINDINGS(ImGuiThemeUtils) {
     
-    emscripten::function("ApplyTweakedTheme", FUNCTION(void, (emscripten::val tweaked_theme), { 
-        ImGuiTheme::ApplyTweakedTheme(import_ImGuiTweakedTheme(tweaked_theme)); 
+    emscripten::function("ImGuiTheme_ApplyTheme", FUNCTION(void, (ImGuiThemeIdx theme), {
+        ImGuiThemeUtils::ApplyTheme((ImGuiTheme::ImGuiTheme_)theme);
     }));
 
+    emscripten::function("ImGuiTheme_ShowThemeTweakTab", &ImGuiThemeUtils::ShowThemeTweakTab);
+    
+    emscripten::function("ImGuiTheme_ApplyTweakedTheme", FUNCTION(void, (emscripten::val tweaked_theme), { 
+        ImGuiThemeUtils::ApplyTweakedTheme(import_ImGuiTweakedTheme(tweaked_theme)); 
+    }));
+}
+
+using namespace  ImPlot;
+
+EMSCRIPTEN_BINDINGS(ImPlot) {
+    
+    emscripten::function("ImPlot_CreateContext", &CreateContextDefault);
+    emscripten::function("ImPlot_DestroyContext", &DestroyContextDefault);
+    emscripten::function("ImPlot_ShowDemoWindow", &ShowDemoWindowDefault);
+    
 }
 //=========================================================================

@@ -2585,29 +2585,29 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
             exports_1("ImGuiSortDirection", ImGuiSortDirection);
             exports_1("SortDirection", ImGuiSortDirection);
             (function (ImGuiKey) {
-                ImGuiKey[ImGuiKey["Tab"] = 0] = "Tab";
-                ImGuiKey[ImGuiKey["LeftArrow"] = 1] = "LeftArrow";
-                ImGuiKey[ImGuiKey["RightArrow"] = 2] = "RightArrow";
-                ImGuiKey[ImGuiKey["UpArrow"] = 3] = "UpArrow";
-                ImGuiKey[ImGuiKey["DownArrow"] = 4] = "DownArrow";
-                ImGuiKey[ImGuiKey["PageUp"] = 5] = "PageUp";
-                ImGuiKey[ImGuiKey["PageDown"] = 6] = "PageDown";
-                ImGuiKey[ImGuiKey["Home"] = 7] = "Home";
-                ImGuiKey[ImGuiKey["End"] = 8] = "End";
-                ImGuiKey[ImGuiKey["Insert"] = 9] = "Insert";
-                ImGuiKey[ImGuiKey["Delete"] = 10] = "Delete";
-                ImGuiKey[ImGuiKey["Backspace"] = 11] = "Backspace";
-                ImGuiKey[ImGuiKey["Space"] = 12] = "Space";
-                ImGuiKey[ImGuiKey["Enter"] = 13] = "Enter";
-                ImGuiKey[ImGuiKey["Escape"] = 14] = "Escape";
-                ImGuiKey[ImGuiKey["KeyPadEnter"] = 15] = "KeyPadEnter";
-                ImGuiKey[ImGuiKey["A"] = 16] = "A";
-                ImGuiKey[ImGuiKey["C"] = 17] = "C";
-                ImGuiKey[ImGuiKey["V"] = 18] = "V";
-                ImGuiKey[ImGuiKey["X"] = 19] = "X";
-                ImGuiKey[ImGuiKey["Y"] = 20] = "Y";
-                ImGuiKey[ImGuiKey["Z"] = 21] = "Z";
-                ImGuiKey[ImGuiKey["COUNT"] = 22] = "COUNT";
+                ImGuiKey[ImGuiKey["Tab"] = 512] = "Tab";
+                ImGuiKey[ImGuiKey["LeftArrow"] = 513] = "LeftArrow";
+                ImGuiKey[ImGuiKey["RightArrow"] = 514] = "RightArrow";
+                ImGuiKey[ImGuiKey["UpArrow"] = 515] = "UpArrow";
+                ImGuiKey[ImGuiKey["DownArrow"] = 516] = "DownArrow";
+                ImGuiKey[ImGuiKey["PageUp"] = 517] = "PageUp";
+                ImGuiKey[ImGuiKey["PageDown"] = 518] = "PageDown";
+                ImGuiKey[ImGuiKey["Home"] = 519] = "Home";
+                ImGuiKey[ImGuiKey["End"] = 520] = "End";
+                ImGuiKey[ImGuiKey["Insert"] = 521] = "Insert";
+                ImGuiKey[ImGuiKey["Delete"] = 522] = "Delete";
+                ImGuiKey[ImGuiKey["Backspace"] = 523] = "Backspace";
+                ImGuiKey[ImGuiKey["Space"] = 524] = "Space";
+                ImGuiKey[ImGuiKey["Enter"] = 525] = "Enter";
+                ImGuiKey[ImGuiKey["Escape"] = 526] = "Escape";
+                ImGuiKey[ImGuiKey["KeyPadEnter"] = 527] = "KeyPadEnter";
+                ImGuiKey[ImGuiKey["A"] = 546] = "A";
+                ImGuiKey[ImGuiKey["C"] = 548] = "C";
+                ImGuiKey[ImGuiKey["V"] = 567] = "V";
+                ImGuiKey[ImGuiKey["X"] = 569] = "X";
+                ImGuiKey[ImGuiKey["Y"] = 570] = "Y";
+                ImGuiKey[ImGuiKey["Z"] = 571] = "Z";
+                ImGuiKey[ImGuiKey["COUNT"] = 666] = "COUNT";
             })(ImGuiKey || (ImGuiKey = {}));
             exports_1("ImGuiKey", ImGuiKey);
             exports_1("Key", ImGuiKey);
@@ -4350,8 +4350,7 @@ System.register(["bind-imgui", "./imconfig.js"], function (exports_1, context_1)
                             return this.native._getAt_KeyMap(Number(key));
                         },
                         set: (target, key, value) => {
-                            return true;
-                            //return this.native._setAt_KeyMap(Number(key), value);
+                            return this.native._setAt_KeyMap(Number(key), value);
                         },
                     });
                     // bool        MouseDown[5];               // Mouse buttons: left, right, middle + extras. ImGui itself mostly only uses left button (BeginPopupContext** are using right button). Others buttons allows us to track if the mouse is being used by your application + available to user as a convenience via IsMouse** API.

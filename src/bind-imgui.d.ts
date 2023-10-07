@@ -910,8 +910,8 @@ export interface reference_ImGuiIO extends Emscripten.EmscriptenClassReference {
     // float         MouseDragThreshold;       // = 6.0f               // Distance threshold before considering we are dragging.
     MouseDragThreshold: number;
     // int           KeyMap[ImGuiKey_COUNT];   // <unset>              // Map of indices into the KeysDown[512] entries array which represent your "native" keyboard state.
-    _getAt_KeyMap(index: ImGuiKey): number;
-    _setAt_KeyMap(index: ImGuiKey, value: number): boolean;
+    _getAt_KeyMap(index: number): number;
+    _setAt_KeyMap(index: number, value: number): boolean;
     // float         KeyRepeatDelay;           // = 0.250f             // When holding a key/button, time before it starts repeating, in seconds (for buttons in Repeat mode, etc.).
     KeyRepeatDelay: number;
     // float         KeyRepeatRate;            // = 0.050f             // When holding a key/button, rate at which it repeats, in seconds.

@@ -486,7 +486,7 @@ export enum ImGuiSortDirection {
 // User fill ImGuiIO.KeyMap[] array with indices into the ImGuiIO.KeysDown[512] array
 export { ImGuiKey as Key };
 export enum ImGuiKey {
-    Tab,
+    Tab=512,
     LeftArrow,
     RightArrow,
     UpArrow,
@@ -502,13 +502,13 @@ export enum ImGuiKey {
     Enter,
     Escape,
     KeyPadEnter,
-    A,         // for text edit CTRL+A: select all
-    C,         // for text edit CTRL+C: copy
-    V,         // for text edit CTRL+V: paste
-    X,         // for text edit CTRL+X: cut
-    Y,         // for text edit CTRL+Y: redo
-    Z,         // for text edit CTRL+Z: undo
-    COUNT,
+    A=546,         // for text edit CTRL+A: select all
+    C=548,         // for text edit CTRL+C: copy
+    V=567,         // for text edit CTRL+V: paste
+    X=569,         // for text edit CTRL+X: cut
+    Y=570,         // for text edit CTRL+Y: redo
+    Z=571,         // for text edit CTRL+Z: undo
+    COUNT=666,
 }
 
 // To test io.KeyMods (which is a combination of individual fields io.KeyCtrl, io.KeyShift, io.KeyAlt set by user/backend)
@@ -2521,8 +2521,7 @@ export class ImGuiIO
             return this.native._getAt_KeyMap(Number(key));
         },
         set: (target: number[], key: PropertyKey, value: number): boolean => {
-            return true;
-            //return this.native._setAt_KeyMap(Number(key), value);
+            return this.native._setAt_KeyMap(Number(key), value);
         },
     });
     // float         KeyRepeatDelay;           // = 0.250f             // When holding a key/button, time before it starts repeating, in seconds (for buttons in Repeat mode, etc.).

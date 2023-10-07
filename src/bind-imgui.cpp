@@ -1348,10 +1348,10 @@ EMSCRIPTEN_BINDINGS(ImGuiIO) {
         // float         MouseDragThreshold;       // = 6.0f               // Distance threshold before considering we are dragging
         CLASS_MEMBER(ImGuiIO, MouseDragThreshold)
         // int           KeyMap[ImGuiKey_COUNT];   // <unset>              // Map of indices into the KeysDown[512] entries array
-        .function("_getAt_KeyMap", FUNCTION(int, (const ImGuiIO& that, ImGuiKey index), {
+        .function("_getAt_KeyMap", FUNCTION(int, (const ImGuiIO& that, int index), {
             return (0 <= index && index < ImGuiKey_COUNT) ? that.KeyMap[index] : -1;
         }))
-        .function("_setAt_KeyMap", FUNCTION(bool, (ImGuiIO& that, ImGuiKey index, int value), {
+        .function("_setAt_KeyMap", FUNCTION(bool, (ImGuiIO& that, int index, int value), {
             if (0 <= index && index < ImGuiKey_COUNT) { that.KeyMap[index] = value; return true; } return false;
         }))
         // float         KeyRepeatDelay;           // = 0.250f             // When holding a key/button, time before it starts repeating, in seconds (for buttons in Repeat mode, etc.).
@@ -1474,10 +1474,10 @@ EMSCRIPTEN_BINDINGS(ImGuiIO) {
             if (0 <= index && index < IM_ARRAYSIZE(that.KeysDown)) { that.KeysDown[index] = value; return true; } return false;
         }), emscripten::allow_raw_pointers())
         // float       NavInputs[ImGuiNavInput_COUNT]; // Gamepad inputs (keyboard keys will be auto-mapped and be written here by ImGui::NewFrame)
-        .function("_getAt_NavInputs", FUNCTION(float, (const ImGuiIO& that, ImGuiNavInput index), {
+        .function("_getAt_NavInputs", FUNCTION(float, (const ImGuiIO& that, int index), {
             return (0 <= index && index < ImGuiNavInput_COUNT) ? that.NavInputs[index] : 0.0f;
         }), emscripten::allow_raw_pointers())
-        .function("_setAt_NavInputs", FUNCTION(bool, (ImGuiIO& that, ImGuiNavInput index, float value), {
+        .function("_setAt_NavInputs", FUNCTION(bool, (ImGuiIO& that, int index, float value), {
             if (0 <= index && index < ImGuiNavInput_COUNT) { that.NavInputs[index] = value; return true; } return false;
         }), emscripten::allow_raw_pointers())
 
